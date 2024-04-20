@@ -3,6 +3,7 @@ package com.example.newsapp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.newsapp.BuildConfig
 import com.example.newsapp.model.Article
 import com.example.newsapp.repository.NewsRepository
 import com.example.newsapp.utils.Constants
@@ -19,7 +20,7 @@ class ArticlesViewModel(
 
     fun getArticles() {
         CoroutineScope(Dispatchers.Main).launch {
-            val response = repository.getArticlesForSources(Constants.source, Constants.API_KEY)
+            val response = repository.getArticlesForSources(BuildConfig.SOURCE, Constants.API_KEY)
             val listOfArticles = response.body()!!.articles
             val sortedListOfArticles = sortListOfSourcesByDate(listOfArticles)
             _articlesList.value = sortedListOfArticles

@@ -18,6 +18,7 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        buildConfigField "String", "SOURCE", "\"bbc-news\""
     }
 
     buildTypes {
@@ -43,6 +44,29 @@ android {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+    flavorDimensions "default"
+    productFlavors {
+        App {
+            dimension "extras"
+        }
+        Plugin {
+            dimension "extras"
+        }
+        bbcSource {
+            dimension "default"
+            buildConfigField "String", "SOURCE", "\"bbc-news\""
+        }
+        //TODO update SOURCE value to desired news source or create new flavor.
+        abcSource {
+            dimension "default"
+            buildConfigField "String", "SOURCE", "\"abc-news\""
+        }
+
     }
 }
 

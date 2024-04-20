@@ -3,10 +3,10 @@ package com.example.newsapp.activities
 import android.os.Bundle
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.newsapp.BuildConfig
 import com.example.newsapp.R
 import com.example.newsapp.adapters.ArticleAdapter
 import com.example.newsapp.repository.NewsRepository
-import com.example.newsapp.utils.Constants
 import com.example.newsapp.viewmodel.ArticlesViewModel
 import java.util.Locale
 
@@ -22,7 +22,7 @@ class ArticlesListActivity : AppCompatActivity() {
         getArticles()
         initObservers()
 
-        title =  Constants.source.uppercase(Locale.getDefault())
+        title =  BuildConfig.SOURCE.uppercase(Locale.getDefault())
     }
 
     private fun initViewModel() {
