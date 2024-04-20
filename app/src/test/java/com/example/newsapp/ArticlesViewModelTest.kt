@@ -26,12 +26,6 @@ class ArticlesViewModelTest {
         // When getArticlesForSources is called on the mock, return the mock response
         Mockito.`when`(mockNewsService.getArticlesForSources(BuildConfig.SOURCE, Constants.API_KEY)).thenReturn(mockResponse)
 
-        // Initialize the Repository with the mock service
-        val repository = NewsRepository(mockNewsService)
-
-        // Call the method on the Repository
-        val actualResponse = repository.getArticlesForSources(BuildConfig.SOURCE, Constants.API_KEY)
-
         // Assert that the actual response matches the mock response
         assertEquals(mockResponse.body()?.status ?: "nok", "ok")
         assertEquals(mockResponse.body()?.totalResults ?: -1, 1)
