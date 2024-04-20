@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
 
         context = this
         if(checkBiometricSupport()){
-            findViewById<Button>(R.id.start_authentication).setOnClickListener{
                 // fingerprint authentication
                 val biometricPrompt = BiometricPrompt.Builder(this)
                     .setTitle("Touch to authenticate")
@@ -56,7 +55,6 @@ class MainActivity : AppCompatActivity() {
 
                 // start the authenticationCallback in mainExecutor
                 biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
-            }
         } else {
             this.startActivity(Intent(this, ArticlesListActivity::class.java))
         }
