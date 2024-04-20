@@ -15,7 +15,7 @@ class ArticleDetailsActivity  : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_details)
         title = getString(R.string.article_details)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
         val article = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
