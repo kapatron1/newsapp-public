@@ -26,7 +26,20 @@ class MainActivity : AppCompatActivity() {
         object : BiometricPrompt.AuthenticationCallback() {
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
                 super.onAuthenticationError(errorCode, errString)
-                notifyUser("Authentication Error : $errString")
+
+                when(errorCode) {
+                    BiometricPrompt.BIOMETRIC_ERROR_LOCKOUT -> notifyUser("Too many attempts. Please try again later")
+                    BiometricPrompt.BIOMETRIC_ERROR_LOCKOUT_PERMANENT -> notifyUser("Too many attempts. Please try again later")
+                    BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED -> notifyUser("User Cancelled the operation")
+                    BiometricPrompt.BIOMETRIC_ERROR_TIMEOUT -> notifyUser("Authentication Timeout")
+                    BiometricPrompt.BIOMETRIC_ERROR_UNABLE_TO_PROCESS -> notifyUser("Unable to process the authentication")
+                    BiometricPrompt.BIOMETRIC_ERROR_HW_NOT_PRESENT,
+                    BiometricPrompt.BIOMETRIC_ERROR_HW_UNAVAILABLE,
+                    BiometricPrompt.BIOMETRIC_ERROR_NO_BIOMETRICS,
+                    BiometricPrompt.BIOMETRIC_ERROR_NO_DEVICE_CREDENTIAL,
+                    BiometricPrompt.BIOMETRIC_ERROR_VENDOR -> startArticlesListActivity()
+                    else -> notifyUser("Authentication Error : $errString")
+                }
             }
 
             // If the fingerprint is recognized by the app then it will call
@@ -56,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 // start the authenticationCallback in mainExecutor
                 biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
         } else {
-            this.startActivity(Intent(this, ArticlesListActivity::class.java))
+            startArticlesListActivity()
         }
     }
 
@@ -88,5 +101,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun notifyUser(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+    private fun startArticlesListActivity() {
+        context?.startActivity(Intent(context, ArticlesListActivity::class.java))
     }
 }
