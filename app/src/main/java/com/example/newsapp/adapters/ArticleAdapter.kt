@@ -10,7 +10,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.newsapp.R
+import com.example.newsapp.activities.ArticleDetailsActivity
 import com.example.newsapp.model.Article
+import com.example.newsapp.utils.Constants
 
 class ArticleAdapter (private val context: Context, private val dataSet: List<Article>) : BaseAdapter() {
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -24,7 +26,6 @@ class ArticleAdapter (private val context: Context, private val dataSet: List<Ar
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
-        TODO("Not yet implemented")
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -50,7 +51,12 @@ class ArticleAdapter (private val context: Context, private val dataSet: List<Ar
             .error(R.drawable.ic_launcher_background)
             .into(holder.headLineImage);
 
-
+        row.setOnClickListener {
+            val intent = Intent(context, ArticleDetailsActivity::class.java).apply {
+                putExtra(Constants.EXTRA_ARTICLE, dataSet[position])
+            }
+            context.startActivity(intent)
+        }
         return row
     }
 

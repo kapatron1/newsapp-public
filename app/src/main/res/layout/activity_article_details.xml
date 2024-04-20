@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    tools:context=".activities.ArticleDetailsActivity">
+
+
+    <ImageView
+        android:id="@+id/article_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:id="@+id/article_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Article Title"
+        style="@style/TitleBold"
+        android:layout_below="@+id/article_image"
+        android:layout_marginBottom="10dp"
+        android:justificationMode="inter_word"
+        />
+
+    <TextView
+        android:id="@+id/article_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Article Description"
+        style="@style/SubtitleLabel"
+        android:layout_below="@+id/article_title"
+        android:layout_marginBottom="10dp"
+        android:justificationMode="inter_word"
+        />
+    <TextView
+        android:id="@+id/article_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Article Content"
+        style="@style/SubtitleLabel"
+        android:layout_below="@id/article_description"/>
+
+
+</RelativeLayout>
