@@ -2,7 +2,9 @@ package com.example.newsapp.activities
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
+import android.widget.AbsListView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +17,7 @@ import com.example.newsapp.repository.NewsRepository
 import com.example.newsapp.utils.Utils
 import com.example.newsapp.viewmodel.ArticlesViewModel
 import java.util.Locale
+
 
 class ArticlesListActivity : AppCompatActivity() {
 
@@ -38,6 +41,19 @@ class ArticlesListActivity : AppCompatActivity() {
                 swipeRefreshLayout.isRefreshing = false
             }, 2000)
         }
+
+        lvArticles.setOnScrollListener(object : AbsListView.OnScrollListener {
+            private var mLastFirstVisibleItem = 0
+            override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {}
+            override fun onScroll(
+                view: AbsListView?, firstVisibleItem: Int,
+                visibleItemCount: Int, totalItemCount: Int
+            ) {
+                swipeRefreshLayout.isEnabled = mLastFirstVisibleItem == 0
+                mLastFirstVisibleItem = firstVisibleItem
+            }
+        })
+
     }
 
     private fun updateListView(){
