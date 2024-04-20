@@ -49,7 +49,7 @@ class ArticlesListActivity : AppCompatActivity() {
                 view: AbsListView?, firstVisibleItem: Int,
                 visibleItemCount: Int, totalItemCount: Int
             ) {
-                swipeRefreshLayout.isEnabled = mLastFirstVisibleItem == 0
+                swipeRefreshLayout.isEnabled = firstVisibleItem == 0
                 mLastFirstVisibleItem = firstVisibleItem
             }
         })
